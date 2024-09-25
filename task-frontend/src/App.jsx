@@ -1,14 +1,12 @@
 import './App.css'
-import HelloWorld from "./HelloWorld.jsx";
+import ListTasksComponent from "./components/ListTasksComponent.jsx";
+
 
 function App() {
 
   return (
       <>
-          <HelloWorld/>
-          <HelloWorld/>
-          <HelloWorld/>
-          <HelloWorld/>
+          <ListTasksComponent/>
       </>
   )
 }
