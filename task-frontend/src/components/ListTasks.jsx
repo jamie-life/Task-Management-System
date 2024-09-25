@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import {deleteTask, getAllTasks} from "../services/TaskService.jsx";
+import {completeTask, deleteTask, getAllTasks, incompleteTask} from "../services/TaskService.jsx";
 import {useNavigate} from "react-router-dom";
 
 function ListTasks() {
@@ -38,6 +38,18 @@ function ListTasks() {
 
     }
 
+    function taskComplete(id) {
+        completeTask(id).then(() => {
+            getTasks()
+        }).catch(error => {console.log(error)})
+    }
+
+    function taskIncomplete(id) {
+        incompleteTask(id).then(() => {
+            getTasks()
+        }).catch(error => {console.log(error)})
+    }
+
     return (
         <div className={'container'}>
             <h2 className={'text-center'}>List of Tasks</h2>
@@ -62,6 +74,16 @@ function ListTasks() {
                                     <td>
                                         <button className={'btn btn-info'}
                                                 onClick={() => updateTask(task.id)}>Update
+                                        </button>
+
+                                        <button style={{marginLeft: "10px"}}
+                                                className={'btn btn-success'}
+                                                onClick={() => taskComplete(task.id)}>Complete
+                                        </button>
+
+                                        <button style={{marginLeft: "10px"}}
+                                                className={'btn btn-primary'}
+                                                onClick={() => taskIncomplete(task.id)}>Incomplete
                                         </button>
 
                                         <button style={{marginLeft: "10px"}}
