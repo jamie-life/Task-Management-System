@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import {useNavigate, useParams} from "react-router-dom";
-import {addTask, getTask} from "../services/TaskService.jsx";
+import {addTask, getTask, updateTask} from "../services/TaskService.jsx";
 
 function Task() {
 
@@ -16,10 +16,17 @@ function Task() {
         e.preventDefault()
         const task = {title, description, completed}
 
-        addTask(task).then((response) => {
-            console.log(response)
-            navigate("/tasks")
-        }).catch((error) => {console.log(error)})
+        if (id){
+            updateTask(id, task).then(response => {
+                console.log(response)
+                navigate("/tasks")
+            }).catch((error) => {console.log(error)})
+        } else {
+            addTask(task).then((response) => {
+                console.log(response)
+                navigate("/tasks")
+            }).catch((error) => {console.log(error)})
+        }
     }
 
     function pageTitle() {
