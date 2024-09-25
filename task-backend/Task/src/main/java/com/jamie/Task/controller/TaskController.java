@@ -12,6 +12,7 @@ import java.util.List;
 @RestController
 @RequestMapping("api/tasks")
 @AllArgsConstructor
+@CrossOrigin("*")
 public class TaskController {
 
     private TaskService taskService;
@@ -60,7 +61,7 @@ public class TaskController {
 
     // Build In Complete Task REST API
     @PatchMapping("{id}/incomplete")
-    public ResponseEntity<TaskDto> inCompleteTask(@PathVariable("id") Long taskId){
+    public ResponseEntity<TaskDto> incompleteTask(@PathVariable("id") Long taskId){
         TaskDto updatedTask = taskService.inCompleteTask(taskId);
         return ResponseEntity.ok(updatedTask);
     }

@@ -4,7 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b26a9358-edaa-40d2-9054-b5d0799aa053" name="Changes" comment="" />
+    <list default="true" id="b26a9358-edaa-40d2-9054-b5d0799aa053" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../task-frontend/src/services/TaskService.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../task-backend/Task/src/main/java/com/jamie/Task/controller/TaskController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../task-backend/Task/src/main/java/com/jamie/Task/controller/TaskController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../task-frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../task-frontend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../task-frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../task-frontend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../task-frontend/src/components/ListTasksComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../task-frontend/src/components/ListTasksComponent.jsx" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -18,6 +25,21 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;jamie-life&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/jamie-life/Task-Management-System.git&quot;,
+    &quot;accountId&quot;: &quot;20f626b7-a94f-40f5-8096-e8d9c8f5521c&quot;
+  }
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 8
 }</component>
@@ -36,6 +58,7 @@
     &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;Spring Boot.TaskApplication.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/Jamie/OneDrive/Documents/Learning/Task Management System/Task/Task/src/main/java/com/jamie/Task&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
@@ -57,16 +80,6 @@
     </key>
   </component>
   <component name="RunManager" selected="Spring Boot.TaskApplication">
-    <configuration default="true" type="GroovyScriptRunConfiguration" factoryName="Groovy">
-      <setting name="path" value="" />
-      <setting name="vmparams" value="" />
-      <setting name="params" value="" />
-      <setting name="workDir" value="file://$PROJECT_DIR$" />
-      <setting name="debug" value="false" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="generated-requests | #1" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" requestIdentifier="#1" runType="Run single request">
       <method v="2" />
     </configuration>
@@ -106,6 +119,8 @@
       <workItem from="1727204781582" duration="429000" />
       <workItem from="1727205219949" duration="4698000" />
       <workItem from="1727277096123" duration="593000" />
+      <workItem from="1727292045613" duration="1731000" />
+      <workItem from="1727295894350" duration="41000" />
     </task>
     <servers />
   </component>
