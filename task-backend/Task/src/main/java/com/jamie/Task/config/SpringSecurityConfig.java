@@ -2,8 +2,8 @@ package com.jamie.Task.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -17,6 +17,7 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
+@EnableMethodSecurity(securedEnabled = true)
 public class SpringSecurityConfig {
 
     @Bean
@@ -25,8 +26,8 @@ public class SpringSecurityConfig {
     }
 
 
-    @Bean
-    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    /*@Bean
+    SecurityFilterChain methodSecurityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((authorizeRequests) -> {
                     authorizeRequests.requestMatchers(HttpMethod.POST, "/api/**").hasRole("ADMIN");
@@ -35,8 +36,20 @@ public class SpringSecurityConfig {
                     authorizeRequests.requestMatchers(HttpMethod.GET, "/api/**").hasAnyRole("ADMIN", "User");
                     authorizeRequests.requestMatchers(HttpMethod.PATCH, "/api/**").hasAnyRole("ADMIN", "User");
 
-                    authorizeRequests.requestMatchers(HttpMethod.GET,  "/api/**").permitAll(); /* If we want to make the GET Related HTTP
-                    request public and without the need of credentials*/
+                    authorizeRequests.requestMatchers(HttpMethod.GET,  "/api/**").permitAll(); *//* If we want to make the GET Related HTTP
+                    request public and without the need of credentials*//*
+                    authorizeRequests.anyRequest().authenticated();
+                }).httpBasic(Customizer.withDefaults());
+        return http.build();
+    }*/
+
+    /*Method Level Security*/
+    @Bean
+    SecurityFilterChain methodSecurityFilterChain(HttpSecurity http) throws Exception {
+        http.csrf(AbstractHttpConfigurer::disable)
+                .authorizeHttpRequests((authorizeRequests) -> {
+
+
                     authorizeRequests.anyRequest().authenticated();
                 }).httpBasic(Customizer.withDefaults());
         return http.build();
@@ -47,7 +60,7 @@ public class SpringSecurityConfig {
         UserDetails Jamie = User.builder()
                 .username("Jamie")
                 .password(passwordEncoder().encode("Test"))
-                .roles("User").build();
+                .roles("USER").build();
 
         UserDetails Admin = User.builder()
                 .username("admin")

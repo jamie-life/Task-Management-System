@@ -110,6 +110,21 @@
 				}
 			],
 			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
 				"method": "PUT",
 				"header": [],
 				"body": {
@@ -185,7 +200,7 @@
 			"response": []
 		},
 		{
-			"name": "Add To Do",
+			"name": "Add Task",
 			"request": {
 				"method": "POST",
 				"header": [],
