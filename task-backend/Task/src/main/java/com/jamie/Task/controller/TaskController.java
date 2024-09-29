@@ -10,21 +10,21 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
-@RestController
-@RequestMapping("api/tasks")
 @AllArgsConstructor
 @CrossOrigin("*")
+@RestController
+@RequestMapping("api/tasks")
 public class TaskController {
 
     private TaskService taskService;
 
     // Add Task REST API
     // Method Level Security Using PreAuthorize
-    @Secured("ROLE_ADMIN") /* same as @PreAuthorize("hasRole('ADMIN')") but
+    /* @Secured("ROLE_ADMIN")  same as @PreAuthorize("hasRole('ADMIN')") but
     PreAuthorize allows more expression based control and can be written in  SpEL (Spring Expression Language).
     e.g. @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
     e.g. @PreAuthorize("#username == authentication.principal.username")*/
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     public ResponseEntity<TaskDto> addTask(@RequestBody TaskDto taskDto) {
         TaskDto task = taskService.addTask(taskDto);

@@ -21,7 +21,7 @@ import org.springframework.security.web.SecurityFilterChain;
 @AllArgsConstructor
 @Configuration
 @EnableWebSecurity
-@EnableMethodSecurity(securedEnabled = true)
+@EnableMethodSecurity()
 public class SpringSecurityConfig {
 
     private UserDetailsService userDetailsService;
@@ -55,6 +55,7 @@ public class SpringSecurityConfig {
     SecurityFilterChain methodSecurityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((authorizeRequests) -> {
+                    authorizeRequests.requestMatchers("/api/auth/**").permitAll();
                     authorizeRequests.anyRequest().authenticated();
                 }).httpBasic(Customizer.withDefaults());
         return http.build();
