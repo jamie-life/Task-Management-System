@@ -1,5 +1,6 @@
 package com.jamie.Task.service.Implementation;
 
+import com.jamie.Task.dto.LoginDto;
 import com.jamie.Task.dto.RegisterDto;
 import com.jamie.Task.entity.Role;
 import com.jamie.Task.entity.User;
@@ -9,6 +10,10 @@ import com.jamie.Task.repository.UserRepository;
 import com.jamie.Task.service.AuthService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +27,7 @@ public class AuthServiceImpl implements AuthService {
     private UserRepository userRepository;
     private RoleRepository roleRepository;
     private PasswordEncoder passwordEncoder;
+    private AuthenticationManager authenticationManager;
 
     @Override
     public String register(RegisterDto registerDto) {
@@ -49,5 +55,18 @@ public class AuthServiceImpl implements AuthService {
         userRepository.save(newUser);
 
         return "User Registered Successfully!";
+    }
+
+    @Override
+    public String login(LoginDto loginDto) {
+
+        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
+                loginDto.getUsernameOrEmail(),
+                loginDto.getPassword()
+        ));
+
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        return "User Logged in Successfully!";
     }
 }
