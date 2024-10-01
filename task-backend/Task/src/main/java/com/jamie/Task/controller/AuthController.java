@@ -9,9 +9,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @AllArgsConstructor
-@CrossOrigin("*")
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping("api/auth")
+@CrossOrigin("*")
 public class AuthController {
     private AuthService authService;
 
