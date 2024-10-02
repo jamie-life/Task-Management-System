@@ -3,6 +3,7 @@ import {getToken} from "./AuthService.jsx";
 
 const REST_API_BASE_URL = 'http://localhost:8080/api/tasks'
 
+
 // Add a request interceptor
 axios.interceptors.request.use(function (config) {
     config.headers['Authorization'] = getToken();

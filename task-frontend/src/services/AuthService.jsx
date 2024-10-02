@@ -6,8 +6,8 @@ export const registerUser = (user) => {
     return axios.post(AUTH_API_BASE_URL + '/register', user)
 }
 
-export const loginUser = (user) => {
-    return axios.post(AUTH_API_BASE_URL + '/login', user)
+export const loginUser = (usernameOrEmail, password) => {
+    return axios.post(AUTH_API_BASE_URL + '/login', { usernameOrEmail, password})
 }
 
 export const storeToken = (token) => localStorage.setItem("token", token)

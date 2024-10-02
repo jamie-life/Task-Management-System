@@ -26,7 +26,7 @@ import java.util.List;
 
 @AllArgsConstructor
 @Configuration
-@EnableWebSecurity
+//@EnableWebSecurity
 @EnableMethodSecurity()
 public class SpringSecurityConfig {
 
@@ -37,36 +37,29 @@ public class SpringSecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
-
-    // Role Based Authorization By HTTP Request
-    /*@Bean
-    SecurityFilterChain methodSecurityFilterChain(HttpSecurity http) throws Exception {
-        http.csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests((authorizeRequests) -> {
-                    authorizeRequests.requestMatchers(HttpMethod.POST, "/api/**").hasRole("ADMIN");
-                    authorizeRequests.requestMatchers(HttpMethod.DELETE, "/api/**").hasRole("ADMIN");
-                    authorizeRequests.requestMatchers(HttpMethod.PUT, "/api/**").hasRole("ADMIN");
-                    authorizeRequests.requestMatchers(HttpMethod.GET, "/api/**").hasAnyRole("ADMIN", "User");
-                    authorizeRequests.requestMatchers(HttpMethod.PATCH, "/api/**").hasAnyRole("ADMIN", "User");
-
-                    authorizeRequests.requestMatchers(HttpMethod.GET,  "/api/**").permitAll(); *//* If we want to make the GET Related HTTP
-                    request public and without the need of credentials*//*
-                    authorizeRequests.anyRequest().authenticated();
-                }).httpBasic(Customizer.withDefaults());
-        return http.build();
-    }*/
-
     /*Method Level Security*/
     @Bean
-    SecurityFilterChain methodSecurityFilterChain(HttpSecurity http) throws Exception {
-        http.csrf(AbstractHttpConfigurer::disable)
-                .cors(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests((authorizeRequests) -> {
-                    authorizeRequests.requestMatchers("/api/auth/**").permitAll();
-                    authorizeRequests.requestMatchers(HttpMethod.OPTIONS, "/**").permitAll();
-                    authorizeRequests.anyRequest().authenticated();
+    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http
+                .cors(Customizer.withDefaults())
+                .csrf(AbstractHttpConfigurer::disable)  // Disable CSRF for testing
+                .authorizeHttpRequests((authorize) -> {
+                    authorize.requestMatchers("/api/auth/**").permitAll();
+                    authorize.anyRequest().authenticated();
                 }).httpBasic(Customizer.withDefaults());
         return http.build();
+    }
+
+    @Bean
+    CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(List.of("http://localhost:3000")); //allows React to access the API from origin on port 3000. Change accordingly
+        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "PATCH"));
+        configuration.setAllowCredentials(true);
+        configuration.addAllowedHeader("*");
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
     }
 
     @Bean
@@ -74,37 +67,43 @@ public class SpringSecurityConfig {
         return configuration.getAuthenticationManager();
     }
 
-    @Bean
-    public CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("http://localhost:3000"));  // Allow requests from frontend
-        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));  // Allow all methods
-        configuration.setAllowedHeaders(List.of("Authorization", "Content-Type"));  // Allow relevant headers
-        configuration.setAllowCredentials(true);  // Allow credentials (cookies, etc.)
 
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);  // Apply this CORS config to all endpoints
-        return source;
-    }
+//
+//    // Using Memory Authentication
+//    /*@Bean
+//    public UserDetailsService userDetailsService() {
+//        UserDetails Jamie = User.builder()
+//                .username("Jamie")
+//                .password(passwordEncoder().encode("Test"))
+//                .roles("USER").build();
+//
+//        UserDetails Admin = User.builder()
+//                .username("admin")
+//                .password(passwordEncoder().encode("admin"))
+//                .roles("ADMIN").build();
+//
+//
+//        return new InMemoryUserDetailsManager(Jamie, Admin);
+//    }*
 
+//    // Role Based Authorization By HTTP Request
+//    /*@Bean
+//    SecurityFilterChain methodSecurityFilterChain(HttpSecurity http) throws Exception {
+//        http.csrf(AbstractHttpConfigurer::disable)
+//                .authorizeHttpRequests((authorizeRequests) -> {
+//                    authorizeRequests.requestMatchers(HttpMethod.POST, "/api/**").hasRole("ADMIN");
+//                    authorizeRequests.requestMatchers(HttpMethod.DELETE, "/api/**").hasRole("ADMIN");
+//                    authorizeRequests.requestMatchers(HttpMethod.PUT, "/api/**").hasRole("ADMIN");
+//                    authorizeRequests.requestMatchers(HttpMethod.GET, "/api/**").hasAnyRole("ADMIN", "User");
+//                    authorizeRequests.requestMatchers(HttpMethod.PATCH, "/api/**").hasAnyRole("ADMIN", "User");
+//
+//                    authorizeRequests.requestMatchers(HttpMethod.GET,  "/api/**").permitAll(); *//* If we want to make the GET Related HTTP
+//                    request public and without the need of credentials*//*
+//                    authorizeRequests.anyRequest().authenticated();
+//                }).httpBasic(Customizer.withDefaults());
+//        return http.build();
+//    }*/
 
-
-    // Not using Memory Authentication
-    /*@Bean
-    public UserDetailsService userDetailsService() {
-        UserDetails Jamie = User.builder()
-                .username("Jamie")
-                .password(passwordEncoder().encode("Test"))
-                .roles("USER").build();
-
-        UserDetails Admin = User.builder()
-                .username("admin")
-                .password(passwordEncoder().encode("admin"))
-                .roles("ADMIN").build();
-
-
-        return new InMemoryUserDetailsManager(Jamie, Admin);
-    }*/
 }
 
 

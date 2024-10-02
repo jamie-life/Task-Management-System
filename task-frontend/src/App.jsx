@@ -6,6 +6,8 @@ import {BrowserRouter, Routes, Route} from "react-router-dom";
 import Task from "./components/Task.jsx";
 import Register from "./components/Register.jsx";
 import Login from "./components/Login.jsx";
+// import Register from "./components/Register.jsx";
+// import Login from "./components/Login.jsx";
 
 function App() {
 
@@ -17,8 +19,7 @@ function App() {
               <Routes>
 
                   {/* http:localhost:3000*/}
-
-                  <Route path="/" element={<ListTasks />} />
+                  <Route path="/" element={<Login />} />
 
                   {/* http:localhost:3000/tasks*/}
                   <Route path="/tasks" element={<ListTasks />} />
