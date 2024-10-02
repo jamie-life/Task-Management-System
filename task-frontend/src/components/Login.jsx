@@ -17,7 +17,8 @@ function Login() {
          await loginUser(usernameOrEmail, password).then((response) => {
              console.log(response.data)
 
-             const token = 'Basic ' + window.btoa(usernameOrEmail + ":" + password);
+             // const token = 'Basic ' + window.btoa(usernameOrEmail + ":" + password);
+             const token = 'Bearer ' + response.data.accessToken;
              storeToken(token)
 
              savedLogin(usernameOrEmail)

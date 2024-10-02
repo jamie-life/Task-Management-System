@@ -1,5 +1,6 @@
 package com.jamie.Task.controller;
 
+import com.jamie.Task.dto.JwtAuthResponseDto;
 import com.jamie.Task.dto.LoginDto;
 import com.jamie.Task.dto.RegisterDto;
 import com.jamie.Task.service.AuthService;
@@ -24,8 +25,12 @@ public class AuthController {
 
     // Login REST API
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody LoginDto loginDto) {
-        String response = authService.login(loginDto);
-        return new ResponseEntity<>(response, HttpStatus.OK);
+    public ResponseEntity<JwtAuthResponseDto> login(@RequestBody LoginDto loginDto) {
+        String token = authService.login(loginDto);
+
+        JwtAuthResponseDto jwtAuthResponseDto = new JwtAuthResponseDto();
+        jwtAuthResponseDto.setAccessToken(token);
+
+        return new ResponseEntity<>(jwtAuthResponseDto, HttpStatus.OK);
     }
 }
