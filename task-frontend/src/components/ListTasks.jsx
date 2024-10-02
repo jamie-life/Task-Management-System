@@ -55,6 +55,7 @@ function ListTasks() {
 
     return (
         <div className={'container'}>
+            <br /> <br />
             <h2 className={'text-center'}>List of Tasks</h2>
             <button className={'btn btn-primary mb-2'} onClick={(addNewTask)} >Add Task</button>
             <div>

@@ -1,7 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 import React from 'react'
 import {useState} from 'react'
-import {loginUser, storeToken} from "../services/AuthService.jsx";
+import {loginUser, savedLogin, storeToken} from "../services/AuthService.jsx";
 import {useNavigate} from "react-router-dom";
 
 function Login() {
@@ -10,27 +10,20 @@ function Login() {
     const [usernameOrEmail, setUsernameOrEmail] = useState('')
     const [password, setPassword] = useState('')
 
-    console.log(usernameOrEmail + " HELLO")
-    localStorage.clear();
-    sessionStorage.clear();
 
-
-    function LoginUser(e) {
+    async function LoginUser(e) {
         e.preventDefault()
 
-        const user = {name, usernameOrEmail, password}
-
-
-         loginUser(usernameOrEmail, password).then((response) => {
+         await loginUser(usernameOrEmail, password).then((response) => {
              console.log(response.data)
 
              const token = 'Basic ' + window.btoa(usernameOrEmail + ":" + password);
-             storeToken(token);
+             storeToken(token)
 
-             console.log(token)
-             console.log(user)
-
+             savedLogin(usernameOrEmail)
              navigate("/tasks")
+
+             window.location.reload(false)
         }).catch(error => {console.log(error)})
     }
 

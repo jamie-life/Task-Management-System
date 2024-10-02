@@ -14,8 +14,6 @@ function Register() {
 
         const user = {name, username, email, password}
 
-        console.log(user)
-
         registerUser(user).then((response) => {
             console.log(response.data)
         }).catch(error => {console.log(error)})
