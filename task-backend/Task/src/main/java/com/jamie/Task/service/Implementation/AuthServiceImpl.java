@@ -1,5 +1,6 @@
 package com.jamie.Task.service.Implementation;
 
+import com.jamie.Task.dto.JwtAuthResponseDto;
 import com.jamie.Task.dto.LoginDto;
 import com.jamie.Task.dto.RegisterDto;
 import com.jamie.Task.entity.Role;
@@ -19,6 +20,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -60,7 +62,7 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public String login(LoginDto loginDto) {
+    public JwtAuthResponseDto login(LoginDto loginDto) {
 
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                 loginDto.getUsernameOrEmail(),
@@ -69,6 +71,32 @@ public class AuthServiceImpl implements AuthService {
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        return jwtTokenProvider.generateToken(authentication);
+        String token = jwtTokenProvider.generateToken(authentication);
+
+        Optional<User> userOptional = userRepository.findByUsernameOrEmail(loginDto.getUsernameOrEmail(),
+                loginDto.getUsernameOrEmail());
+
+
+        String username = "";
+        String userRole = "";
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+            username = user.getUsername();
+            Optional<Role> optionalRole = user.getRoles().stream().findFirst();
+
+            if (optionalRole.isPresent()) {
+                Role role = optionalRole.get();
+                userRole = role.getName();
+            }
+        }
+
+        JwtAuthResponseDto jwtAuthResponseDto = new JwtAuthResponseDto();
+        jwtAuthResponseDto.setUsername(username);
+        jwtAuthResponseDto.setRole(userRole);
+        jwtAuthResponseDto.setAccessToken(token);
+
+
+
+        return jwtAuthResponseDto;
     }
 }

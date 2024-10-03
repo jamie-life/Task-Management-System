@@ -1,14 +1,14 @@
 // eslint-disable-next-line no-unused-vars
 import React from 'react'
 import {NavLink, useNavigate} from "react-router-dom";
-import {getLoggedInUser, isUserLoggedIn, logout} from "../../services/AuthService.jsx";
+import {isUserLoggedIn, logout} from "../../services/AuthService.jsx";
 
 
 const Header = () => {
 
     const isAuth = isUserLoggedIn();
     const navigate = useNavigate();
-    const username = getLoggedInUser()
+    const username = sessionStorage.getItem("authenticatedUserUsername");
 
     function handleLogout() {
         logout()

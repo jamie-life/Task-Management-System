@@ -19,9 +19,11 @@ function Login() {
 
              // const token = 'Basic ' + window.btoa(usernameOrEmail + ":" + password);
              const token = 'Bearer ' + response.data.accessToken;
-             storeToken(token)
+             const role = response.data.role;
+             const username = response.data.username;
 
-             savedLogin(usernameOrEmail)
+             storeToken(token)
+             savedLogin(usernameOrEmail, role, username)
              navigate("/tasks")
 
              window.location.reload(false)

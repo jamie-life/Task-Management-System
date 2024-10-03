@@ -2,6 +2,7 @@
 import React, {useEffect, useState} from 'react'
 import {completeTask, deleteTask, getAllTasks, incompleteTask} from "../services/TaskService.jsx";
 import {useNavigate} from "react-router-dom";
+import {isAdminUser} from "../services/AuthService.jsx";
 
 // import {storeToken} from "../services/AuthService.jsx";
 
@@ -10,6 +11,8 @@ function ListTasks() {
     const [tasks, setTasks] = useState([])
 
     const navigate = useNavigate();
+
+    const isAdmin = isAdminUser();
 
     useEffect(() => {
         getTasks()
@@ -57,7 +60,10 @@ function ListTasks() {
         <div className={'container'}>
             <br /> <br />
             <h2 className={'text-center'}>List of Tasks</h2>
-            <button className={'btn btn-primary mb-2'} onClick={(addNewTask)} >Add Task</button>
+            {
+                isAdmin &&
+                <button className={'btn btn-primary mb-2'} onClick={(addNewTask)}>Add Task</button>
+            }
             <div>
                 <table className={'table table-bordered table-striped'}>
                     <thead>
@@ -76,9 +82,12 @@ function ListTasks() {
                                     <td>{task.description}</td>
                                     <td>{task.completed ? 'Completed' : 'In Progress'}</td>
                                     <td>
-                                        <button className={'btn btn-info'}
-                                                onClick={() => updateTask(task.id)}>Update
-                                        </button>
+                                        {
+                                            isAdmin &&
+                                            <button className={'btn btn-info'}
+                                                    onClick={() => updateTask(task.id)}>Update
+                                            </button>
+                                        }
 
                                         <button style={{marginLeft: "10px"}}
                                                 className={'btn btn-success'}
@@ -90,10 +99,13 @@ function ListTasks() {
                                                 onClick={() => taskIncomplete(task.id)}>Incomplete
                                         </button>
 
-                                        <button style={{marginLeft: "10px"}}
-                                                className={'btn btn-danger'}
-                                                onClick={() => removeTask(task.id)}>Delete
-                                        </button>
+                                        {
+                                            isAdmin &&
+                                            <button style={{marginLeft: "10px"}}
+                                                    className={'btn btn-danger'}
+                                                    onClick={() => removeTask(task.id)}>Delete
+                                            </button>
+                                        }
                                     </td>
 
                                 </tr>

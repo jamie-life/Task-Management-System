@@ -1,8 +1,10 @@
 import {useState} from 'react'
 import {registerUser} from "../services/AuthService.jsx";
+import {useNavigate} from "react-router-dom";
 
 function Register() {
 
+    const navigate = useNavigate();
     const [name, setName] = useState('')
     const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
@@ -16,6 +18,7 @@ function Register() {
 
         registerUser(user).then((response) => {
             console.log(response.data)
+            navigate("/tasks")
         }).catch(error => {console.log(error)})
     }
 
