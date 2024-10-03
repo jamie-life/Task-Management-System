@@ -31,4 +31,5 @@ public class AuthController {
 
         return new ResponseEntity<>(jwtAuthResponseDto, HttpStatus.OK);
     }
+    
 }
