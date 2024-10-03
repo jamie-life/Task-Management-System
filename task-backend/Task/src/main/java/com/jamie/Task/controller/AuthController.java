@@ -32,4 +32,9 @@ public class AuthController {
         return new ResponseEntity<>(jwtAuthResponseDto, HttpStatus.OK);
     }
 
+
+    @GetMapping("/hello")
+    public String HelloWorld() {
+        return "Hello World";
+    }
 }
