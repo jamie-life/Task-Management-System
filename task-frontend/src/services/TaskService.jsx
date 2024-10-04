@@ -1,7 +1,7 @@
 import axios from "axios";
 import {getToken} from "./AuthService.jsx";
 
-const REST_API_BASE_URL = 'https://task-env.eba-6nub22wh.eu-west-2.elasticbeanstalk.com/api/tasks'
+const REST_API_BASE_URL = 'https://task-437619.lm.r.appspot.com/api/tasks'
 
 
 // Add a request interceptor
