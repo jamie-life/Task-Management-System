@@ -57,66 +57,67 @@ function ListTasks() {
     }
 
     return (
-        <div className={'container'}>
-            <br /> <br />
-            <h2 className={'text-center'}>List of Tasks</h2>
-            {
-                isAdmin &&
-                <button className={'btn btn-primary mb-2'} onClick={(addNewTask)}>Add Task</button>
-            }
-            <div>
-                <table className={'table table-bordered table-striped'}>
-                    <thead>
-                        <tr>
-                            <th>Task Title</th>
-                            <th>Description</th>
-                            <th>Status</th>
-                            <th>Actions</th>
-                        </tr>
+        <div className="container my-4">
+            <h2 className="text-center mb-4">List of Tasks</h2>
+
+            {isAdmin && (
+                <button className="btn btn-outline-dark mb-3" onClick={addNewTask}>
+                    Add Task
+                </button>
+            )}
+
+            <div className="table-responsive shadow">
+                <table className="table table-hover table-striped">
+                    <thead className="table-dark">
+                    <tr>
+                        <th>Task Title</th>
+                        <th>Description</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
                     </thead>
                     <tbody>
-                        {
-                            tasks.map((task) => (
-                                <tr key={task.id}>
-                                    <td>{task.title}</td>
-                                    <td>{task.description}</td>
-                                    <td>{task.completed ? 'Completed' : 'In Progress'}</td>
-                                    <td>
-                                        {
-                                            isAdmin &&
-                                            <button className={'btn btn-info'}
-                                                    onClick={() => updateTask(task.id)}>Update
-                                            </button>
-                                        }
-
-                                        <button style={{marginLeft: "10px"}}
-                                                className={'btn btn-success'}
-                                                onClick={() => taskComplete(task.id)}>Complete
+                    {tasks.map((task) => (
+                        <tr key={task.id}>
+                            <td>{task.title}</td>
+                            <td>{task.description}</td>
+                            <td>
+                <span className={`badge ${task.completed ? 'bg-success' : 'bg-warning'}`}>
+                  {task.completed ? 'Completed' : 'In Progress'}
+                </span>
+                            </td>
+                            <td>
+                                <div className="d-flex gap-2">
+                                    {isAdmin && (
+                                        <button className="btn btn-info" onClick={() => updateTask(task.id)}>
+                                            Update
                                         </button>
+                                    )}
 
-                                        <button style={{marginLeft: "10px"}}
-                                                className={'btn btn-primary'}
-                                                onClick={() => taskIncomplete(task.id)}>Incomplete
+                                    <button className="btn btn-success" onClick={() => taskComplete(task.id)}>
+                                        Complete
+                                    </button>
+
+                                    <button className="btn btn-primary" onClick={() => taskIncomplete(task.id)}>
+                                        Incomplete
+                                    </button>
+
+                                    {isAdmin && (
+                                        <button className="btn btn-danger" onClick={() => removeTask(task.id)}>
+                                            Delete
                                         </button>
-
-                                        {
-                                            isAdmin &&
-                                            <button style={{marginLeft: "10px"}}
-                                                    className={'btn btn-danger'}
-                                                    onClick={() => removeTask(task.id)}>Delete
-                                            </button>
-                                        }
-                                    </td>
-
-                                </tr>
-                            ))
-                        }
+                                    )}
+                                </div>
+                            </td>
+                        </tr>
+                    ))}
                     </tbody>
                 </table>
             </div>
-
         </div>
-    )
+    );
+
+
 }
 
 export default ListTasks

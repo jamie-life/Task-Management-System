@@ -49,54 +49,67 @@ function Task() {
     }, [])
 
     return (
-        <div className={'container'}>
-            <br/> <br/>
-            <div className={'row'}>
-                <div className={'card col-md-6 offset-md-3 offset-md-3'}>
-                    {pageTitle()}
-                    <div className={'card-body'}>
-                        <form>
-                            <div className={'form-group mb-2'}>
-                                <label className={'form-label'}>Task Title:</label>
-                                <input className={'form-control'}
-                                       type='text'
-                                       placeholder={"Enter Task Title"}
-                                       name={"title"}
-                                       value={title}
-                                       onChange={(e) => setTitle(e.target.value)}/>
-                            </div>
+        <div className="container py-5">
+            <div className="row justify-content-center">
+                <div className="col-md-6">
+                    <div className="card shadow-sm">
+                        <div className="card-header text-center">
+                            <h5>{pageTitle()}</h5>
+                        </div>
+                        <div className="card-body">
+                            <form>
+                                <div className="mb-3">
+                                    <label className="form-label">Task Title:</label>
+                                    <input
+                                        className="form-control"
+                                        type="text"
+                                        placeholder="Enter Task Title"
+                                        name="title"
+                                        value={title}
+                                        onChange={(e) => setTitle(e.target.value)}
+                                    />
+                                </div>
 
-                            <div className={'form-group mb-2'}>
-                                <label className={'form-label'}>Task Description:</label>
-                                <input className={'form-control'}
-                                       type='text'
-                                       placeholder={"Enter Task Description"}
-                                       name={"description"}
-                                       value={description}
-                                       onChange={(e) => setDescription(e.target.value)}/>
-                            </div>
+                                <div className="mb-3">
+                                    <label className="form-label">Task Description:</label>
+                                    <input
+                                        className="form-control"
+                                        type="text"
+                                        placeholder="Enter Task Description"
+                                        name="description"
+                                        value={description}
+                                        onChange={(e) => setDescription(e.target.value)}
+                                    />
+                                </div>
 
-                            <div className={'form-group mb-2'}>
-                                <label className={'form-label'}>Task Status:</label>
-                                <select className={'form-control'}
+                                <div className="mb-3">
+                                    <label className="form-label">Task Status:</label>
+                                    <select
+                                        className="form-select"
                                         value={completed}
-                                        onChange={(e) => {
-                                            setCompleted(e.target.value)
-                                        }}>
-                                    <option value={"false"}>In Progress</option>
-                                    <option value={"true"}>Completed</option>
-                                </select>
-                            </div>
+                                        onChange={(e) => setCompleted(e.target.value)}
+                                    >
+                                        <option value="false">In Progress</option>
+                                        <option value="true">Completed</option>
+                                    </select>
+                                </div>
 
-                            <button className={'btn btn-success'}
-                                    onClick={(e) => saveOrUpdateTask(e) }>Submit</button>
-
-                        </form>
+                                <div className="text-center">
+                                    <button
+                                        className="btn btn-dark"
+                                        onClick={(e) => saveOrUpdateTask(e)}
+                                    >
+                                        Submit
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    )
+    );
+
 }
 
 export default Task

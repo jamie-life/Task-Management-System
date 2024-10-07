@@ -18,56 +18,52 @@ const Header = () => {
     return (
         <div>
             <header>
-                <nav className={'navbar navbar-expand-lg navbar-dark bg-dark'}>
+                <nav className="navbar navbar-expand-lg navbar-dark bg-dark p-3"> {/* Added padding */}
                     <div>
-                        <a className={'navbar-brand '}
-                           href={"https://www.linkedin.com/in/jamielinked/"}>
-                            Task Management System </a>
+                        <a className="navbar-brand" href="https://www.linkedin.com/in/jamielinked/">
+                            Task Management System
+                        </a>
                     </div>
-                    <div className={'collapse navbar-collapse'}>
-                        <ul className={'navbar-nav'}>
-                            {
-                                !isAuth &&
-                                <li className={'nav-item"'}>
-                                    <NavLink to={"/tasks"} className={'nav-link'}> Task </NavLink>
+                    <div className="collapse navbar-collapse">
+                        <ul className="navbar-nav">
+                            {isAuth && (
+                                <li className="nav-item">
+                                    <NavLink to="/tasks" className="nav-link"> Task </NavLink>
                                 </li>
-                            }
+                            )}
                         </ul>
                     </div>
-                    <ul className={'navbar-nav'}>
-                        {
-                            isAuth &&
-                            <li className={'nav-item"'}>
-                                <NavLink to={"/register"} className={'nav-link'}> Register </NavLink>
+                    <ul className="navbar-nav">
+                        {!isAuth && (
+                            <li className="nav-item">
+                                <NavLink to="/register" className="nav-link"> Register </NavLink>
                             </li>
-                        }
+                        )}
 
-                        {
-                            isAuth &&
-                            <li className={'nav-item"'}>
-                                <NavLink to={"/Login"} className={'nav-link'}> Login </NavLink>
+                        {!isAuth && (
+                            <li className="nav-item">
+                                <NavLink to="/Login" className="nav-link"> Login </NavLink>
                             </li>
-                        }
+                        )}
 
-                        {
-                            !isAuth &&
-                            <li className={'nav-item'}>
-                                <span className={'nav-link'}>Welcome, {username}!</span> {/* Display username */}
+                        {isAuth && (
+                            <li className="nav-item">
+                                <span className="nav-link">Welcome, {username}!</span> {/* Display username */}
                             </li>
-                        }
+                        )}
 
-                        {
-                            !isAuth &&
-                            <li className={'nav-item"'}>
-                                <NavLink to={"/Login"} className={'nav-link'}
-                                onClick={handleLogout}> Sign Out </NavLink>
+                        {isAuth && (
+                            <li className="nav-item">
+                                <NavLink to="/Login" className="nav-link" onClick={handleLogout}>
+                                    Sign Out
+                                </NavLink>
                             </li>
-                        }
-
+                        )}
                     </ul>
                 </nav>
             </header>
         </div>
-    )
+    );
+
 }
 export default Header

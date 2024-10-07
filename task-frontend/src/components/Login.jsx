@@ -31,41 +31,46 @@ function Login() {
     }
 
     return (
-        <div className={"container"}>
-            <br /> <br />
-            <div className="row">
-                <div className={'col-md-6 offset-md-3 offset-md-3'}>
-                    <div className={'card'}>
-                        <div className={'card-header'}>
-                            <h2 className={'text-center'}> Log In</h2>
+        <div className="container py-5">
+            <div className="row justify-content-center">
+                <div className="col-md-6">
+                    <div className="card shadow-sm">
+                        <div className="card-header text-center">
+                            <h2>Log In</h2>
                         </div>
 
-                        <div className={'card-body'}>
+                        <div className="card-body">
                             <form>
-                                <div className={'row mb-3'}>
-                                    <label className={"col-md-3 col-form-label"}> Username / Email</label>
-                                    <div className={"col-md-9"}>
-                                        <input type='text' name={"usernameOrEmail"} className={'form-control'}
-                                               placeholder={"Email or Username"} value={usernameOrEmail}
-                                               onChange={(e) => setUsernameOrEmail(e.target.value)}>
-                                        </input>
-                                    </div>
+                                <div className="mb-3">
+                                    <label className="form-label">Username / Email</label>
+                                    <input
+                                        type="text"
+                                        name="usernameOrEmail"
+                                        className="form-control"
+                                        placeholder="Email or Username"
+                                        value={usernameOrEmail}
+                                        onChange={(e) => setUsernameOrEmail(e.target.value)}
+                                    />
                                 </div>
 
-
-                                <div className={'row mb-3'}>
-                                    <label className={"col-md-3 col-form-label"}> Password</label>
-                                    <div className={"col-md-9"}>
-                                        <input type='password' name={"Password"} className={'form-control'}
-                                               placeholder={"Enter Password"} value={password}
-                                               onChange={(e) => setPassword(e.target.value)}>
-                                        </input>
-                                    </div>
+                                <div className="mb-3">
+                                    <label className="form-label">Password</label>
+                                    <input
+                                        type="password"
+                                        name="password"
+                                        className="form-control"
+                                        placeholder="Enter Password"
+                                        value={password}
+                                        onChange={(e) => setPassword(e.target.value)}
+                                    />
                                 </div>
 
-                                <div className={'form-group mb-3'}>
-                                    <button className={'btn btn-primary'}
-                                            onClick={(e) => LoginUser(e)}>Submit
+                                <div className="text-center">
+                                    <button
+                                        className="btn btn-dark"
+                                        onClick={(e) => LoginUser(e)}
+                                    >
+                                        Submit
                                     </button>
                                 </div>
                             </form>
@@ -74,7 +79,8 @@ function Login() {
                 </div>
             </div>
         </div>
-    )
+    );
+
 }
 
 export default Login

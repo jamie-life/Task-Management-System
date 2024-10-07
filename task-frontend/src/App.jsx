@@ -14,7 +14,7 @@ function App() {
     function AuthenticatedRoute({children}) {
         const isAuth = isUserLoggedIn()
 
-        if(!isAuth){
+        if(isAuth){
             return children
         } else {
             return <Navigate to={"/"}/>

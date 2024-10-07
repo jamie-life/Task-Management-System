@@ -3,11 +3,9 @@ import React from 'react'
 
 const FooterComponent = () => {
     return (
-        <div>
-            <footer className={'footer'}>
-                <span> Jamie Grant</span>
-            </footer>
-        </div>
-    )
-}
+        <footer className="footer text-center">
+            <span>© {new Date().getFullYear()} Jamie Grant</span>
+        </footer>
+    );
+};
 export default FooterComponent

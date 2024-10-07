@@ -22,7 +22,11 @@ export const savedLogin = (usernameOrEmail, role, username) => {
 
 export const isUserLoggedIn = () => {
     const username = sessionStorage.getItem("authenticatedUser")
-    return username == null;
+    if (username == null) {
+        return  false
+    } else {
+        return true
+    }
 }
 
 export const getLoggedInUser = () => {
