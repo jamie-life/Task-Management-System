@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const AUTH_API_BASE_URL = 'https://task-437619.lm.r.appspot.com/api/auth'
+const AUTH_API_BASE_URL = 'https://2531471314.xyz/api/auth'
 
 export const registerUser = (user) => {
     return axios.post(AUTH_API_BASE_URL + '/register', user)
